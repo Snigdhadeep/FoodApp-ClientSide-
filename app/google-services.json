@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "137007997269",
+    "firebase_url": "https://fir-4-81d45.firebaseio.com",
+    "project_id": "fir-4-81d45",
+    "storage_bucket": "fir-4-81d45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:137007997269:android:d9501b0a3f547be2",
+        "android_client_info": {
+          "package_name": "com.example.diku.food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "137007997269-gqcik2sgdpb1sa4sgri9mfu5e3dapupd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.diku.food",
+            "certificate_hash": "c17ef608c4eb66f00ddf9e2a4646fb1dcd162c7d"
+          }
+        },
+        {
+          "client_id": "137007997269-p1k2n4fhr2l09nmn52v0ob15uaif58p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbxHN-YkWNq_RQmVa_oEg4O7PcxZvdpIM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "137007997269-p1k2n4fhr2l09nmn52v0ob15uaif58p9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
