@@ -1,6 +1,7 @@
 package com.example.diku.food;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -109,6 +110,8 @@ public class Cart extends AppCompatActivity {
                 request_ref.child(String.valueOf(System.currentTimeMillis())).setValue(request_class);
                 new Database(getBaseContext()).cleanCart();
                 Toast.makeText(Cart.this, "Tank you, Order placed ", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),OrderStatus.class);
+                startActivity(intent);
             }
         });
 

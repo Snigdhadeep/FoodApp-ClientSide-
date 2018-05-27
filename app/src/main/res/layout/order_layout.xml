@@ -24,30 +24,43 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvCartitemname"
+                android:id="@+id/tvOrder_id"
                 android:gravity="center_vertical|start"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                android:text="Food1"
+                android:text="#111111"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
             <TextView
-                android:id="@+id/tvCartitemprice"
+                android:id="@+id/tvOrder_status"
                 android:gravity="center_vertical|start"
                 android:textAllCaps="true"
                 android:textStyle="italic"
-                android:text="0"
+                android:text="100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tvOrder_phone"
+                android:gravity="center_vertical|start"
+                android:textAllCaps="true"
+                android:textStyle="italic"
+                android:text="100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tvOrder_address"
+                android:gravity="center_vertical|start"
+                android:textAllCaps="true"
+                android:textStyle="italic"
+                android:text="100"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>
-        <ImageView
-            android:id="@+id/iv_cartitemimage"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginBottom="16dp"/>
+
 
     </LinearLayout>
 

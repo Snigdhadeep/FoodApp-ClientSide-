@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.example.diku.food.Common.Common;
 import com.example.diku.food.Interface.ItemclickListener;
 import com.example.diku.food.Module.Category;
+import com.example.diku.food.Module.Order;
+import com.example.diku.food.Service.ListenOrder;
 import com.example.diku.food.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -80,6 +82,11 @@ public class Home extends AppCompatActivity
 
 
         loadMenu();
+
+        //Register service
+
+        Intent intent = new Intent(Home.this, ListenOrder.class);
+        startService(intent);
 
 
 
@@ -164,9 +171,20 @@ public class Home extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
 
+            Intent intent=new Intent(this,Cart.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_orders) {
+            Intent intent=new Intent(this,OrderStatus.class);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_logout) {
+
+            Intent intent=new Intent(this,Signin.class);
+           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
 
         }
 

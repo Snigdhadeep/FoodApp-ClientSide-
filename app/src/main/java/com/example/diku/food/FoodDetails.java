@@ -1,5 +1,6 @@
 package com.example.diku.food;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -62,20 +63,32 @@ public class FoodDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                new Database(getBaseContext()).addToCart(new Order(
+                if (btn_elegant.getNumber() != "0") {
 
-                        foodlistId,
-                        currentfoodList.getName(),
+                    new Database(getBaseContext()).addToCart(new Order(
 
-                        btn_elegant.getNumber(),
-                        currentfoodList.getPrice(),
-                        currentfoodList.getDiscount()
+                            foodlistId,
+                            currentfoodList.getName(),
 
-                ));
+                            btn_elegant.getNumber(),
+                            currentfoodList.getPrice(),
+                            currentfoodList.getDiscount()
+
+                    ));
 
 
-                Toast.makeText(FoodDetails.this, "added to cart "+foodlistId, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodDetails.this, "added to cart " + foodlistId, Toast.LENGTH_SHORT).show();
+
+                    Intent intent=new Intent(getApplicationContext(),Cart.class);
+                    startActivity(intent);
+
+                }else {
+
+                    Toast.makeText(FoodDetails.this, "please,add number of items", Toast.LENGTH_SHORT).show();
+                }
+
             }
+
         });
 
 
