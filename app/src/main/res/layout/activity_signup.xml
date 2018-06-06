@@ -1,43 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context="com.example.diku.food.Signup">
+    android:background="@drawable/bgimage">
 
-    <EditText
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
-        android:id="@+id/et_name"
-        android:text=""/>
+        android:background="@drawable/transparentimage">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone number"
-        android:id="@+id/et_phup"
-        android:text=""/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="37dp"
+            android:layout_marginLeft="30dp">
 
+            <ImageView
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_passup"
-        android:text=""
-        android:hint="Password"
-        android:inputType="textPassword"
+                android:id="@+id/signupback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:padding="10dp"
+                android:layout_gravity="center"
 
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bt_signup2"
-       android:layout_gravity="center"
-        android:text="sign up"/>
+                />
 
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIGN UP"
+                android:textSize="22dp"
+                android:textColor="#ADCCE2"
+                android:layout_marginLeft="16dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+       <!-- <ImageView
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:background="@drawable/ic_shopping_cart_black_24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+            <EditText
+                android:textSize="16dp"
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="আপনার নাম"
+                android:textColorHint="#ADCCE2"
+                android:textColor="#ADCCE2"
+                android:layout_marginLeft="22dp"
+                android:inputType="text"
+                android:background="#0000"
+                android:padding="16dp"
+                android:layout_marginRight="35dp"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="1dp"
+                android:background="#ADCCE2" />
+
+
+
+
+
+
+
+
+
+            <EditText
+                android:textSize="16dp"
+                android:id="@+id/et_phup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ফোন নম্বর"
+
+                android:textColorHint="#ADCCE2"
+                android:textColor="#ADCCE2"
+                android:layout_marginLeft="22dp"
+                android:inputType="number"
+                android:background="#0000"
+                android:padding="16dp"
+
+                android:layout_marginRight="35dp"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="1dp"
+                android:background="#ADCCE2" />
+
+            <EditText
+                android:textSize="16dp"
+                android:id="@+id/et_passup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="পাস্‌ওয়ার্ড "
+                android:textColorHint="#ADCCE2"
+                android:maxLength="12"
+                android:layout_marginLeft="22dp"
+                android:inputType="textPassword"
+                android:textColor="#ADCCE2"
+                android:background="#0000"
+                android:padding="16dp"
+
+                android:layout_marginRight="35dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="#ADCCE2"/>
+
+
+
+
+            <TextView
+                android:id="@+id/bt_signup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rect"
+                android:text="নথিভুক্ত করুন"
+                android:textSize="16dp"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:padding="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="28dp"
+                android:layout_marginTop="32dp"
+
+
+                />
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</FrameLayout>

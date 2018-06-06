@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Diku on 20-05-2018.
+ * Created by Diku on 06-06-2018.
  */
 
-public class Database extends SQLiteAssetHelper{
-
-    private static final String DB_NAME="eatDB.db";
+public class Databasesingle extends SQLiteAssetHelper {
+    private static final String DB_NAME="single_eatDB.db";
     private static final int DB_VER=1;
-    public Database(Context context) {
+    public Databasesingle(Context context) {
         super(context,DB_NAME,null,DB_VER);
     }
 
@@ -41,10 +40,10 @@ public class Database extends SQLiteAssetHelper{
 
             do {
                 result.add(new Order(c.getString(c.getColumnIndex("productid")),
-                                                c.getString(c.getColumnIndex("productname")),
-                                                c.getString(c.getColumnIndex("quantity")),
-                                                c.getString(c.getColumnIndex("price")),
-                                                c.getString(c.getColumnIndex("discount"))
+                        c.getString(c.getColumnIndex("productname")),
+                        c.getString(c.getColumnIndex("quantity")),
+                        c.getString(c.getColumnIndex("price")),
+                        c.getString(c.getColumnIndex("discount"))
 
                 ));
                 Log.i("productid",c.getString(c.getColumnIndex("productid")));
@@ -114,13 +113,13 @@ public class Database extends SQLiteAssetHelper{
         String query= String.format("INSERT INTO eat(productid,productname,quantity,price,discount) VALUES('%s','%s','%s','%s','%s');",
 
                 order.getProductId(),
-        order.getProductName(),
-        order.getQuantity(),
-        order.getPrice(),
-        order.getDiscount()
+                order.getProductName(),
+                order.getQuantity(),
+                order.getPrice(),
+                order.getDiscount()
 
 
-                );
+        );
 
 
         db.execSQL(query);
@@ -133,3 +132,5 @@ public class Database extends SQLiteAssetHelper{
         db.execSQL(query);
     }
 }
+
+

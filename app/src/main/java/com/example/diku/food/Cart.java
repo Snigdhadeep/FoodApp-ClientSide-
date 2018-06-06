@@ -141,7 +141,7 @@ public class Cart extends AppCompatActivity {
             Log.i("price",order.getQuantity());
 
             total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
-            Locale locale=new Locale("en","US");
+            Locale locale=new Locale("hi", "IN");
             NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
 
             tv_total.setText(fnt.format(total));

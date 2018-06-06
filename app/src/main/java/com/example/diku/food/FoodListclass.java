@@ -43,14 +43,8 @@ public class FoodListclass extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        getSupportActionBar().setTitle(null);
+
 
 
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -77,19 +71,21 @@ public class FoodListclass extends AppCompatActivity {
 
 
 
-    private void loadlist(String categoryid) {
+    public void loadlist(String categoryid) {
 
 
         adapter=new FirebaseRecyclerAdapter<FoodList, FoodViewHolder2>(
                 FoodList.class,
-                R.layout.fooditem,
+                R.layout.foodlist_item,
                 FoodViewHolder2.class,
                 fooditems.orderByChild("menuid").equalTo(categoryid)
 
         ) {
             @Override
             protected void populateViewHolder(FoodViewHolder2 viewHolder, FoodList model, int position) {
-                viewHolder.txt_item_food.setText(model.getName());
+                viewHolder.txt_fooditem_name.setText(model.getName());
+                viewHolder.txt_fooditem_price.setText(model.getPrice());
+                viewHolder.txt_fooditem_discount.setText(model.getDiscount());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.img_item_food);
 
 

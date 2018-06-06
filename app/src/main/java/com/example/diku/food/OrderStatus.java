@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.diku.food.Common.Common;
+import com.example.diku.food.Interface.ItemclickListener;
 import com.example.diku.food.Module.Request;
 import com.example.diku.food.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -72,6 +73,12 @@ public class OrderStatus extends AppCompatActivity {
                 viewHolder.tvOrder_address.setText(model.getAddress());
                 viewHolder.tvOrder_phone.setText(model.getPhone());
                 viewHolder.tvOrder_status.setText(Common.convertCodeToStatus(model.getStatus()));
+                viewHolder.setItemclickListener(new ItemclickListener() {
+                    @Override
+                    public void onclick(View view, int position, boolean isLongclick) {
+
+                    }
+                });
 
             }
         };

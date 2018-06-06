@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.diku.food.Common.Common;
@@ -20,16 +22,25 @@ import com.google.firebase.database.ValueEventListener;
 public class Signin extends AppCompatActivity {
 
     EditText et_ph,et_pass;
-    Button bt_signin;
+    TextView bt_signin;
+    ImageView signinback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
         et_ph=(EditText)findViewById(R.id.et_ph);
         et_pass=(EditText)findViewById(R.id.et_pass);
-        bt_signin=(Button)findViewById(R.id.bt_signin2);
+        bt_signin=(TextView)findViewById(R.id.bt_signin2);
+        signinback=(ImageView)findViewById(R.id.signinback);
 
-
+        signinback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Signin.this,GetStart.class);
+                startActivity(intent);
+            }
+        });
 
 //connect with firebase
         FirebaseDatabase database=FirebaseDatabase.getInstance();
