@@ -278,7 +278,7 @@ public class Home extends AppCompatActivity
                viewHolder.setItemclickListener(new ItemclickListener() {
                    @Override
                    public void onclick(View view, int position, boolean isLongclick) {
-                       Intent intent =new Intent(Home.this,FoodListclass.class);
+                       Intent intent =new Intent(Home.this,FoodListClass1.class);
                        intent.putExtra("foodkey",adapter.getRef(position).getKey());
                        Log.i("foodkey",adapter.getRef(position).getKey().toString());
                        startActivity(intent);

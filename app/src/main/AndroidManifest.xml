@@ -12,18 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"/>
-
-
-        <activity android:name=".Signin"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".Signin"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Home"
-
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FoodListclass"
@@ -43,18 +40,17 @@
 
         <activity
             android:name=".GetStart"
-            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            >
-
-
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity
+            android:name=".FoodListClass1"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
