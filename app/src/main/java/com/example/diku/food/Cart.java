@@ -2,12 +2,14 @@ package com.example.diku.food;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import com.example.diku.food.ViewHolder.CartAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +45,18 @@ public class Cart extends AppCompatActivity {
     List<Order> cart=new ArrayList<>();
     CartAdapter adapter;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    ArrayList<String> currentTime=new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        getSupportActionBar().setTitle(null);
+
+
 
         database=FirebaseDatabase.getInstance();
         request_ref=database.getReference("Requests");
@@ -74,8 +85,8 @@ public class Cart extends AppCompatActivity {
     private void showAlertDialog() {
 
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("One last step");
-        alertdialog.setMessage("your Address");
+        alertdialog.setTitle("অর্ডারটি ক্রয় করার শেষ ধাপ ");
+        alertdialog.setMessage("আপনার ঠিকানাটি নীচে লিখবেন");
         alertdialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
         final EditText etAddress=new EditText(this);
@@ -88,7 +99,7 @@ public class Cart extends AppCompatActivity {
 
         etAddress.setLayoutParams(layoutParams);
         alertdialog.setView(etAddress);
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("হ্যাঁ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -107,7 +118,11 @@ public class Cart extends AppCompatActivity {
                 //submit to firebase
                 //using current time as key
 
-                request_ref.child(String.valueOf(System.currentTimeMillis())).setValue(request_class);
+
+             String time=String.valueOf(System.currentTimeMillis());
+
+
+                request_ref.child(time).setValue(request_class);
                 new Database(getBaseContext()).cleanCart();
                 Toast.makeText(Cart.this, "Tank you, Order placed ", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(getApplicationContext(),OrderStatus.class);
@@ -116,7 +131,7 @@ public class Cart extends AppCompatActivity {
         });
 
 
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("না", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -129,9 +144,11 @@ public class Cart extends AppCompatActivity {
     private void loadListFood() {
 
 
+
         cart=new Database(this).getCarts();
         adapter=new CartAdapter(cart,this);
         recyclerView.setAdapter(adapter);
+        //recyclerView.setNestedScrollingEnabled(false);
 
         //calculate total price
         int total=0;
@@ -140,13 +157,28 @@ public class Cart extends AppCompatActivity {
             Log.i("price",order.getPrice());
             Log.i("price",order.getQuantity());
 
-            total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+            double price=Double.parseDouble(order.getPrice());
+
+            total+=(roundTwoDecimals(price))*(Integer.parseInt(order.getQuantity()));
             Locale locale=new Locale("hi", "IN");
             NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
 
             tv_total.setText(fnt.format(total));
         }
+
+
     }
 
+    double roundTwoDecimals(double d) {
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        return Double.valueOf(twoDForm.format(d));
+    }
 
+    @Override
+    public void onBackPressed() {
+
+       Intent intent=new Intent(getApplicationContext(),Home.class);
+       startActivity(intent);
+
+    }
 }

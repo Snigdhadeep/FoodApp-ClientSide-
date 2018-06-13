@@ -1,11 +1,13 @@
 package com.example.diku.food.DataBase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
+import com.example.diku.food.Cart;
 import com.example.diku.food.Module.Order;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -29,7 +31,7 @@ public class Database extends SQLiteAssetHelper{
         SQLiteDatabase db=getReadableDatabase();
         SQLiteQueryBuilder qb=new SQLiteQueryBuilder();
 
-        String[] sqlSelect={"productid","productname","quantity","price","discount"};
+        String[] sqlSelect={"id","productid","productname","quantity","price","discount"};
         String sqlTable="eat";
 
         qb.setTables(sqlTable);
@@ -40,13 +42,16 @@ public class Database extends SQLiteAssetHelper{
         if (c.moveToFirst()){
 
             do {
-                result.add(new Order(c.getString(c.getColumnIndex("productid")),
+                result.add(new Order(
+                        c.getInt(c.getColumnIndex("id")),
+                        c.getString(c.getColumnIndex("productid")),
                                                 c.getString(c.getColumnIndex("productname")),
                                                 c.getString(c.getColumnIndex("quantity")),
                                                 c.getString(c.getColumnIndex("price")),
                                                 c.getString(c.getColumnIndex("discount"))
 
                 ));
+                Log.i("id36",String.valueOf(c.getInt(c.getColumnIndex("id"))));
                 Log.i("productid",c.getString(c.getColumnIndex("productid")));
                 Log.i("productname",c.getString(c.getColumnIndex("productname")));
                 Log.i("quantity",c.getString(c.getColumnIndex("quantity")));
@@ -79,6 +84,7 @@ public class Database extends SQLiteAssetHelper{
 
         final List<Order> result=new ArrayList<>();
 
+
         if (c.moveToFirst()){
 
             do {
@@ -101,6 +107,19 @@ public class Database extends SQLiteAssetHelper{
         }
 
         return result;
+
+
+
+
+    }
+
+    public void deleteCart(Order order) {
+        SQLiteDatabase db=getReadableDatabase();
+        String query= String.format("DELETE FROM eat WHERE id = '%d'",order.getId());
+        db.execSQL(query);
+
+
+
 
 
 
@@ -132,4 +151,13 @@ public class Database extends SQLiteAssetHelper{
         String query= String.format("DELETE FROM eat");
         db.execSQL(query);
     }
+
+    public void cleanCartsingle(String ref){
+
+        SQLiteDatabase db=getReadableDatabase();
+        String query= String.format("DELETE FROM eat WHERE id = '%d';",ref);
+        db.execSQL(query);
+    }
+
+
 }

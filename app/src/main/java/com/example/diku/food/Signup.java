@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Signup extends AppCompatActivity {
-    EditText et_phup,et_passup,et_name;
+    EditText et_phup,et_passup,et_name,et_email;
     TextView bt_signup2;
     ImageView signupback;
     @Override
@@ -34,6 +34,7 @@ public class Signup extends AppCompatActivity {
         et_phup=(EditText)findViewById(R.id.et_phup);
         et_passup=(EditText)findViewById(R.id.et_passup);
         et_name=(EditText)findViewById(R.id.et_name);
+        et_email=(EditText)findViewById(R.id.et_email);
 
         bt_signup2=(TextView)findViewById(R.id.bt_signup2);
         signupback=(ImageView)findViewById(R.id.signupback);
@@ -73,7 +74,7 @@ public class Signup extends AppCompatActivity {
                        else{
 
                            dialog.dismiss();
-                           User user=new User(et_name.getText().toString(),et_passup.getText().toString());
+                           User user=new User(et_name.getText().toString(),et_passup.getText().toString(),et_email.getText().toString());
                            table.child(et_phup.getText().toString()).setValue(user);
                            Toast.makeText(Signup.this, "registerd your ph no.", Toast.LENGTH_SHORT).show();
                            finish();

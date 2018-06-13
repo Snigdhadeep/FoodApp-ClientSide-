@@ -264,7 +264,7 @@ public class FoodListClass1 extends AppCompatActivity
 
         ) {
             @Override
-            protected void populateViewHolder(FoodViewHolder2 viewHolder, FoodList model, int position) {
+            protected void populateViewHolder(FoodViewHolder2 viewHolder, final FoodList model, int position) {
                 viewHolder.txt_fooditem_name.setText(model.getName());
                 viewHolder.txt_fooditem_price.setText(model.getPrice());
                 viewHolder.txt_fooditem_discount.setText(model.getDiscount());
@@ -277,6 +277,8 @@ public class FoodListClass1 extends AppCompatActivity
                     public void onclick(View view, int position, boolean isLongclick) {
                         Intent intent=new Intent(FoodListClass1.this,FoodDetails.class);
                         intent.putExtra("foodlistId", adapter.getRef(position).getKey());
+                        intent.putExtra("foodlistdiscount", local.getDiscount());
+                        intent.putExtra("foodlistprice", local.getPrice());
                         startActivity(intent);
                     }
                 });

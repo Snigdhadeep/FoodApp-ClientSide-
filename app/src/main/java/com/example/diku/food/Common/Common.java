@@ -1,5 +1,7 @@
 package com.example.diku.food.Common;
 
+import com.example.diku.food.Module.Order;
+import com.example.diku.food.Module.Request;
 import com.example.diku.food.Module.User;
 
 /**
@@ -9,6 +11,7 @@ import com.example.diku.food.Module.User;
 public class Common {
 
     public static User currentUser;
+    public static final String DELETE="Delete";
     public static String convertCodeToStatus(String status) {
 
         if (status.equals("0"))

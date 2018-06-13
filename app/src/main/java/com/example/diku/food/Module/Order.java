@@ -6,6 +6,7 @@ package com.example.diku.food.Module;
 
 public class Order {
 
+    private int id;
     private String ProductId;
     private String ProductName;
     private String Quantity;
@@ -21,6 +22,23 @@ public class Order {
         Quantity = quantity;
         Price = price;
         Discount = discount;
+    }
+
+    public Order(int id, String productId, String productName, String quantity, String price, String discount) {
+        this.id = id;
+        ProductId = productId;
+        ProductName = productName;
+        Quantity = quantity;
+        Price = price;
+        Discount = discount;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProductId() {

@@ -34,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +43,12 @@ import java.util.Locale;
 public class FoodDetails extends AppCompatActivity {
 
 
-    TextView foodname_details,txtfoodprice_details,txtfooddescription_details,total2,pay;
+    TextView foodname_details,txtfoodprice_details,txtfooddescription_details,total2,pay,txt_fooditem_discount,txtfoodprice_discount;
     ImageView img_fooddetails;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ElegantNumberButton btn_elegant;
     
+
 
 
 
@@ -58,7 +60,9 @@ public class FoodDetails extends AppCompatActivity {
     
     DatabaseReference  request_ref;
 
-    int totalmoney=0;
+    double totalmoney=0.00;
+    double discounted_money=1.0;
+    double price_intent=0.0;
 
 
     List<Order> virtualcart=new ArrayList<>();
@@ -84,9 +88,30 @@ public class FoodDetails extends AppCompatActivity {
         txtfooddescription_details=(TextView)findViewById(R.id.txtfooddescription_details);
         total2=(TextView)findViewById(R.id.total2);
         pay=(TextView)findViewById(R.id.pay);
+        txt_fooditem_discount=(TextView)findViewById(R.id.txt_fooditem_discount);
+
+
+
+        if(getIntent()!=null){
+
+            foodlistId=getIntent().getStringExtra("foodlistId");
+           String price_intent=getIntent().getStringExtra("foodlistprice");
+           double price=Double.parseDouble(price_intent);
+           String foodlistdiscount=getIntent().getStringExtra("foodlistdiscount");
+           double discount=Double.parseDouble(foodlistdiscount);
+            discounted_money=(price-(price*(discount/100)));
+
+        }
+
+        if(!foodlistId.isEmpty()){
+
+            getdetailfood(foodlistId);
+
+        }
 
 
         btn_elegant=(ElegantNumberButton)findViewById(R.id.btn_elegant);
+
 
         btn_elegant.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
@@ -104,6 +129,7 @@ public class FoodDetails extends AppCompatActivity {
             }
         });
 
+        txtfoodprice_discount=(TextView)findViewById(R.id.txtfoodprice_discount);
 
         img_fooddetails=(ImageView)findViewById(R.id.img_fooddetails);
         collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
@@ -127,11 +153,14 @@ public class FoodDetails extends AppCompatActivity {
                     ));
 
 
+
+
                     Toast.makeText(FoodDetails.this, "added to cart " + foodlistId, Toast.LENGTH_SHORT).show();
                     Log.i("price3", currentfoodList.getPrice());
                    // new Database(getBaseContext()).cleanCart();
 
                     Intent intent=new Intent(getApplicationContext(),Cart.class);
+                    intent.putExtra("foodlistId",foodlistId);
                     startActivity(intent);
 
                 }else {
@@ -151,17 +180,7 @@ public class FoodDetails extends AppCompatActivity {
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapseAppbar);
 
-        if(getIntent()!=null){
 
-            foodlistId=getIntent().getStringExtra("foodlistId");
-
-        }
-
-        if(!foodlistId.isEmpty()){
-            
-            getdetailfood(foodlistId);
-
-        }
 
     }
 
@@ -169,8 +188,8 @@ public class FoodDetails extends AppCompatActivity {
     private void showAlertDialog() {
 
         AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
-        alertdialog.setTitle("One last step");
-        alertdialog.setMessage("your Address");
+        alertdialog.setTitle("অর্ডারটি ক্রয় করার শেষ ধাপ ");
+        alertdialog.setMessage("আপনার ঠিকানাটি নীচে লিখবেন");
         alertdialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
         final EditText etAddress=new EditText(this);
@@ -183,7 +202,7 @@ public class FoodDetails extends AppCompatActivity {
 
         etAddress.setLayoutParams(layoutParams);
         alertdialog.setView(etAddress);
-        alertdialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        alertdialog.setPositiveButton("হ্যাঁ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -225,7 +244,7 @@ public class FoodDetails extends AppCompatActivity {
         });
 
 
-        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        alertdialog.setNegativeButton("না", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
@@ -236,16 +255,28 @@ public class FoodDetails extends AppCompatActivity {
     }
     private void loadtotalmoney(int newValue) {
 
+        double price=Double.parseDouble(currentfoodList.getPrice());
+        double discount=Double.parseDouble(currentfoodList.getDiscount());
+        discounted_money=(price-(price*(discount/100)));
 
-        totalmoney=(newValue)*(Integer.parseInt(currentfoodList.getPrice()));
+        totalmoney=roundTwoDecimals((newValue)*(discounted_money));
+
+
         Locale locale=new Locale("en","US");
         NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
 
+
+        txtfoodprice_discount.setText(String.valueOf(discounted_money));
         total2.setText(totalmoney+"টাকা");
 
 
 
 
+    }
+
+    double roundTwoDecimals(double d) {
+        DecimalFormat twoDForm = new DecimalFormat("##00.0#");
+        return Double.valueOf(twoDForm.format(d));
     }
 
     private void getdetailfood(final String foodlistId) {
@@ -261,6 +292,8 @@ public class FoodDetails extends AppCompatActivity {
                 foodname_details.setText(currentfoodList.getName());
                 txtfoodprice_details.setText(currentfoodList.getPrice());
                 txtfooddescription_details.setText(currentfoodList.getDescription());
+                txt_fooditem_discount.setText(currentfoodList.getDiscount());
+                txtfoodprice_discount.setText(String.valueOf(discounted_money));
 
                 collapsingToolbarLayout.setTitle(currentfoodList.getName());
 
