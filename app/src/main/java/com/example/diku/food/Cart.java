@@ -151,26 +151,34 @@ public class Cart extends AppCompatActivity {
         //recyclerView.setNestedScrollingEnabled(false);
 
         //calculate total price
-        int total=0;
+        double total=0.0;
         for(Order order:cart){
 
-            Log.i("price",order.getPrice());
-            Log.i("price",order.getQuantity());
+            Log.i("price12",order.getPrice());
+            Log.i("price13",order.getQuantity());
+            Log.i("discount15",order.getDiscount());
 
             double price=Double.parseDouble(order.getPrice());
+            double discount=Double.parseDouble(order.getDiscount());
+            double discounted_money=roundTwoDecimals((price-(price*(discount/100))));
+            Log.i("discounted_money",String.valueOf(discounted_money));
 
-            total+=(roundTwoDecimals(price))*(Integer.parseInt(order.getQuantity()));
+
+
+            total+=(discounted_money)*(Integer.parseInt(order.getQuantity()));
+            Log.i("total",String.valueOf(total));
+
             Locale locale=new Locale("hi", "IN");
             NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
 
-            tv_total.setText(fnt.format(total));
+            tv_total.setText(String.valueOf(roundTwoDecimals(total)));
         }
 
 
     }
 
     double roundTwoDecimals(double d) {
-        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        DecimalFormat twoDForm = new DecimalFormat("##00.0#");
         return Double.valueOf(twoDForm.format(d));
     }
 

@@ -104,7 +104,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         Locale locale=new Locale("hi", "IN");
         NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
         double price=Double.parseDouble(listdata.get(position).getPrice());
-        double price1=(roundTwoDecimals(price))*(Integer.parseInt(listdata.get(position).getQuantity()));
+        double discount=Double.parseDouble(listdata.get(position).getDiscount());
+        double discounted_money=(price-(price*(discount/100)));
+        double price1=(discounted_money)*(Integer.parseInt(listdata.get(position).getQuantity()));
         holder.tvCartitemprice.setText(fnt.format(price1));
 
         holder.tvCartitemname.setText(listdata.get(position).getProductName());
