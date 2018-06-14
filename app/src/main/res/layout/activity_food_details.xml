@@ -159,6 +159,7 @@
                         <TextView
                             android:id="@+id/txtfoodprice_details"
                             android:text="Price"
+                            android:background="@drawable/strikethrough"
                             android:textColorHint="@color/colorPrimaryDark"
                             android:padding="12dp"
                             android:textStyle="bold"
@@ -171,6 +172,7 @@
                             android:layout_height="wrap_content"
 
                             android:text=" টাকা"
+                            android:background="@drawable/strikethrough"
 
                             android:textColor="#000"
                             android:layout_alignParentBottom="true"

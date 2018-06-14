@@ -14,7 +14,7 @@ import com.example.diku.food.R;
 
 public class FoodViewHolder2 extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txt_fooditem_name,txt_fooditem_price,txt_fooditem_discount;
+    public TextView txt_fooditem_name,txt_fooditem_price,txt_fooditem_discount,txt_discountedprice;
     public ImageView img_item_food;
 
     //created a package "ItemclickListener"
@@ -28,6 +28,7 @@ public class FoodViewHolder2 extends RecyclerView.ViewHolder implements View.OnC
         txt_fooditem_name=(TextView)itemView.findViewById(R.id.txt_fooditem_name);
         txt_fooditem_price=(TextView)itemView.findViewById(R.id.txt_fooditem_price);
         txt_fooditem_discount=(TextView)itemView.findViewById(R.id.txt_fooditem_discount);
+        txt_discountedprice=(TextView)itemView.findViewById(R.id.txt_discountedprice);
         img_item_food=(ImageView) itemView.findViewById(R.id.image_fooditem);
         itemView.setOnClickListener(this);
 

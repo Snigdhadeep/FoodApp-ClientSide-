@@ -98,7 +98,29 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_fooditem_price"
                     android:text="০"
+                    android:background="@drawable/strikethrough"
                     android:layout_marginTop="20dp"
+                    android:textColor="#000"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text=" টাকা"
+                    android:background="@drawable/strikethrough"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#000"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_discountedprice"
+                    android:text="০"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
                     android:textColor="#000"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"/>

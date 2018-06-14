@@ -2,6 +2,7 @@ package com.example.diku.food;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -297,6 +298,8 @@ public class FoodDetails extends AppCompatActivity {
 
                 collapsingToolbarLayout.setTitle(currentfoodList.getName());
 
+                strikeThroughText(txtfoodprice_details);
+
 
             }
 
@@ -307,8 +310,13 @@ public class FoodDetails extends AppCompatActivity {
         });
     }
 
-
+    private void strikeThroughText(TextView price){
+        price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    }
 
 
 
 }
+
+
+

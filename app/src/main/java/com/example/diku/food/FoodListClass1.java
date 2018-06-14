@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,9 +172,22 @@ public class FoodListClass1 extends AppCompatActivity
             @Override
             protected void populateViewHolder(FoodViewHolder2 viewHolder, FoodList model, int position) {
 
+
+
+                Log.i("getprice14",model.getPrice());
+                Log.i("getdiscount14",model.getDiscount());
+
+
+                double price=Double.parseDouble(model.getPrice());
+                double discount=Double.parseDouble(model.getDiscount());
+               double discounted_money=(price-(price*(discount/100)));
+                Log.i("gettotal14",String.valueOf(discounted_money));
+
+
                 viewHolder.txt_fooditem_name.setText(model.getName());
                 viewHolder.txt_fooditem_price.setText(model.getPrice());
                 viewHolder.txt_fooditem_discount.setText(model.getDiscount());
+                viewHolder.txt_discountedprice.setText(String.valueOf(roundTwoDecimals(discounted_money)));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.img_item_food);
 
 
@@ -192,6 +206,12 @@ public class FoodListClass1 extends AppCompatActivity
 
         recyclerView.setAdapter(search_adapter);
 
+    }
+
+
+    double roundTwoDecimals(double d) {
+        DecimalFormat twoDForm = new DecimalFormat("##00.0#");
+        return Double.valueOf(twoDForm.format(d));
     }
 
     private void loadSuggest() {
@@ -265,9 +285,21 @@ public class FoodListClass1 extends AppCompatActivity
         ) {
             @Override
             protected void populateViewHolder(FoodViewHolder2 viewHolder, final FoodList model, int position) {
+
+
+                Log.i("getprice14",model.getPrice());
+                Log.i("getdiscount14",model.getDiscount());
+
+
+                double price=Double.parseDouble(model.getPrice());
+                double discount=Double.parseDouble(model.getDiscount());
+                double discounted_money=(price-(price*(discount/100)));
+                Log.i("gettotal14",String.valueOf(discounted_money));
+
                 viewHolder.txt_fooditem_name.setText(model.getName());
                 viewHolder.txt_fooditem_price.setText(model.getPrice());
                 viewHolder.txt_fooditem_discount.setText(model.getDiscount());
+                viewHolder.txt_discountedprice.setText(String.valueOf(roundTwoDecimals(discounted_money)));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.img_item_food);
 
 
