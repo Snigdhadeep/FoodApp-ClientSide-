@@ -144,14 +144,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1"
-                            android:id="@+id/txt_fooditem_weight"
-                            android:textColor="#000"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" কেজি |"
+                            android:id="@+id/txt_fooditem_unit"
                             android:textColor="#000"
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"/>

@@ -20,8 +20,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.diku.food.Common.Common;
 import com.example.diku.food.Interface.ItemclickListener;
 import com.example.diku.food.Module.FoodList;
+import com.example.diku.food.Module.User;
 import com.example.diku.food.ViewHolder.FoodViewHolder2;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -188,6 +190,7 @@ public class FoodListClass1 extends AppCompatActivity
                 viewHolder.txt_fooditem_price.setText(model.getPrice());
                 viewHolder.txt_fooditem_discount.setText(model.getDiscount());
                 viewHolder.txt_discountedprice.setText(String.valueOf(roundTwoDecimals(discounted_money)));
+                viewHolder.txt_fooditem_unit.setText(model.getUnit());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.img_item_food);
 
 
@@ -223,9 +226,11 @@ public class FoodListClass1 extends AppCompatActivity
 
                Toast.makeText(FoodListClass1.this, ""+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
 
+
                for(DataSnapshot postSnapshot:dataSnapshot.getChildren()) {
 
                    FoodList item = postSnapshot.getValue(FoodList.class);
+
                    suggestList.add(item.getName());
                }
            }
@@ -293,14 +298,18 @@ public class FoodListClass1 extends AppCompatActivity
 
                 double price=Double.parseDouble(model.getPrice());
                 double discount=Double.parseDouble(model.getDiscount());
-                double discounted_money=(price-(price*(discount/100)));
+                final double discounted_money=(price-(price*(discount/100)));
                 Log.i("gettotal14",String.valueOf(discounted_money));
 
                 viewHolder.txt_fooditem_name.setText(model.getName());
                 viewHolder.txt_fooditem_price.setText(model.getPrice());
                 viewHolder.txt_fooditem_discount.setText(model.getDiscount());
                 viewHolder.txt_discountedprice.setText(String.valueOf(roundTwoDecimals(discounted_money)));
+                viewHolder.txt_fooditem_unit.setText(model.getUnit());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.img_item_food);
+
+
+
 
 
                 final FoodList local=model;
@@ -310,7 +319,7 @@ public class FoodListClass1 extends AppCompatActivity
                         Intent intent=new Intent(FoodListClass1.this,FoodDetails.class);
                         intent.putExtra("foodlistId", adapter.getRef(position).getKey());
                         intent.putExtra("foodlistdiscount", local.getDiscount());
-                        intent.putExtra("foodlistprice", local.getPrice());
+                        intent.putExtra("foodlistprice", String.valueOf(roundTwoDecimals(discounted_money)));
                         startActivity(intent);
                     }
                 });

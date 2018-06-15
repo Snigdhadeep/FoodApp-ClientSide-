@@ -44,7 +44,7 @@ import java.util.Locale;
 public class FoodDetails extends AppCompatActivity {
 
 
-    TextView foodname_details,txtfoodprice_details,txtfooddescription_details,total2,pay,txt_fooditem_discount,txtfoodprice_discount;
+    TextView foodname_details,txtfoodprice_details,txtfooddescription_details,total2,pay,txt_fooditem_discount,txtfoodprice_discount,txt_fooditem_unit;
     ImageView img_fooddetails;
     CollapsingToolbarLayout collapsingToolbarLayout;
     ElegantNumberButton btn_elegant;
@@ -63,13 +63,13 @@ public class FoodDetails extends AppCompatActivity {
 
     double totalmoney=0.00;
     double discounted_money=1.0;
-    double price_intent=0.0;
+    String money;
 
 
     List<Order> virtualcart=new ArrayList<>();
     CartAdapter adapter;
 
-
+    String price_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,8 @@ public class FoodDetails extends AppCompatActivity {
         fooddetails_ref=firebaseDatabase.getReference("Foods");
         request_ref=firebaseDatabase.getReference("Requests");
 
+        price_intent=getIntent().getStringExtra("foodlistprice");
+
       //  elegantNumberButton=(ElegantNumberButton)findViewById(R.id.btn_elegant);
 
         foodname_details=(TextView)findViewById(R.id.foodname_details);
@@ -90,17 +92,29 @@ public class FoodDetails extends AppCompatActivity {
         total2=(TextView)findViewById(R.id.total2);
         pay=(TextView)findViewById(R.id.pay);
         txt_fooditem_discount=(TextView)findViewById(R.id.txt_fooditem_discount);
+        txt_fooditem_unit=(TextView)findViewById(R.id.txt_fooditem_unit);
+        txtfoodprice_discount=(TextView)findViewById(R.id.txtfoodprice_discount);
 
 
+
+
+
+txtfoodprice_discount.setText(price_intent);
 
         if(getIntent()!=null){
 
             foodlistId=getIntent().getStringExtra("foodlistId");
-           String price_intent=getIntent().getStringExtra("foodlistprice");
-           double price=Double.parseDouble(price_intent);
+
+
+          /* double price=Double.parseDouble(price_intent);
            String foodlistdiscount=getIntent().getStringExtra("foodlistdiscount");
            double discount=Double.parseDouble(foodlistdiscount);
-            discounted_money=(price-(price*(discount/100)));
+            discounted_money=(price-(price*(discount/100)));*/
+
+
+
+
+
 
         }
 
@@ -130,7 +144,6 @@ public class FoodDetails extends AppCompatActivity {
             }
         });
 
-        txtfoodprice_discount=(TextView)findViewById(R.id.txtfoodprice_discount);
 
         img_fooddetails=(ImageView)findViewById(R.id.img_fooddetails);
         collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
@@ -142,13 +155,16 @@ public class FoodDetails extends AppCompatActivity {
 
                 if (btn_elegant.getNumber() != "0") {
 
+                    int quantity=Integer.parseInt(btn_elegant.getNumber());
+                   double totalcartmoney=quantity*roundTwoDecimals(discounted_money);
+
                     new Database(getBaseContext()).addToCart(new Order(
 
                             foodlistId,
                             currentfoodList.getName(),
 
                             btn_elegant.getNumber(),
-                            currentfoodList.getPrice(),
+                            String.valueOf(totalcartmoney),
                             currentfoodList.getDiscount()
 
                     ));
@@ -282,10 +298,14 @@ public class FoodDetails extends AppCompatActivity {
 
     private void getdetailfood(final String foodlistId) {
 
+
+
         fooddetails_ref.child(foodlistId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                  currentfoodList=dataSnapshot.getValue(FoodList.class);
+
+                // set all values of cuurent fooditem detils
 
                 Picasso.with(getBaseContext()).load(currentfoodList.getImage()).into(img_fooddetails);
                 //foodname_details,txtfoodprice_details,txtfooddescription_details
@@ -294,11 +314,14 @@ public class FoodDetails extends AppCompatActivity {
                 txtfoodprice_details.setText(currentfoodList.getPrice());
                 txtfooddescription_details.setText(currentfoodList.getDescription());
                 txt_fooditem_discount.setText(currentfoodList.getDiscount());
-                txtfoodprice_discount.setText(String.valueOf(discounted_money));
+                //txtfoodprice_discount.setText(String.valueOf(discounted_money));
 
                 collapsingToolbarLayout.setTitle(currentfoodList.getName());
+                txt_fooditem_unit.setText(currentfoodList.getUnit());
 
-                strikeThroughText(txtfoodprice_details);
+                txt_fooditem_discount.setText(price_intent);
+
+                //strikeThroughText(txtfoodprice_details);
 
 
             }

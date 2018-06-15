@@ -6,20 +6,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_menu"
-            android:icon="@drawable/ic_restaurant_black_24dp"
-            android:title="Menu" />
+            android:icon="@drawable/ic_navhome"
+            android:title="হোম্‌" />
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
-            android:title="cart" />
+            android:title="কার্ট" />
         <item
             android:id="@+id/nav_orders"
             android:icon="@drawable/ic_access_time_black_24dp"
-            android:title="order" />
+            android:title="অর্ডার লিস্ট" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_arrow_back_black_24dp"
-            android:title="Log out" />
+            android:title="লগ্‌ আউট" />
     </group>
 
 

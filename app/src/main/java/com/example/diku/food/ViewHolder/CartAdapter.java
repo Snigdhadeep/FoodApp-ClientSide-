@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,16 +99,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         TextDrawable drawable=TextDrawable.builder()
                 .buildRound(""+listdata.get(position).getQuantity(), Color.RED);
 
+        Log.i("quantity148",listdata.get(position).getQuantity());
+
         holder.iv_cartitemimage.setImageDrawable(drawable);
 
 
         Locale locale=new Locale("hi", "IN");
         NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
         double price=Double.parseDouble(listdata.get(position).getPrice());
-        double discount=Double.parseDouble(listdata.get(position).getDiscount());
+       /* double discount=Double.parseDouble(listdata.get(position).getDiscount());
         double discounted_money=(price-(price*(discount/100)));
-        double price1=(discounted_money)*(Integer.parseInt(listdata.get(position).getQuantity()));
-        holder.tvCartitemprice.setText(fnt.format(price1));
+        double price1=(discounted_money)*(Integer.parseInt(listdata.get(position).getQuantity()));*/
+        Log.i("price149",listdata.get(position).getPrice());
+        Log.i("discount458",listdata.get(position).getDiscount());
+     /*   Log.i("discounted1458",String.valueOf(discounted_money));
+        Log.i("price1258",String.valueOf(price1));*/
+
+        holder.tvCartitemprice.setText(String.valueOf(roundTwoDecimals(price)));
 
         holder.tvCartitemname.setText(listdata.get(position).getProductName());
 

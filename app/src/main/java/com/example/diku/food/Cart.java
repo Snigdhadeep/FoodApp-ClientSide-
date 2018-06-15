@@ -158,22 +158,23 @@ public class Cart extends AppCompatActivity {
             Log.i("price13",order.getQuantity());
             Log.i("discount15",order.getDiscount());
 
-            double price=Double.parseDouble(order.getPrice());
-            double discount=Double.parseDouble(order.getDiscount());
+            double price=roundTwoDecimals(Double.parseDouble(order.getPrice()));
+     /*       double discount=Double.parseDouble(order.getDiscount());
             double discounted_money=roundTwoDecimals((price-(price*(discount/100))));
-            Log.i("discounted_money",String.valueOf(discounted_money));
+            Log.i("discounted_money",String.valueOf(discounted_money));*/
 
 
 
-            total+=(discounted_money)*(Integer.parseInt(order.getQuantity()));
+            total+=price;
             Log.i("total",String.valueOf(total));
 
-            Locale locale=new Locale("hi", "IN");
-            NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);
+          /*  Locale locale=new Locale("hi", "IN");
+            NumberFormat fnt=NumberFormat.getCurrencyInstance(locale);*/
 
-            tv_total.setText(String.valueOf(roundTwoDecimals(total)));
+
+            Log.i("total145",String.valueOf(roundTwoDecimals(total)));
         }
-
+        tv_total.setText(String.valueOf(roundTwoDecimals(total)));
 
     }
 
